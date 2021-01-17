@@ -1,30 +1,7 @@
 const { ApolloServer, gql } = require('apollo-server');
+const resolvers = require("./resolvers/resolvers");
+const  typeDefs =require('./resolvers/schema');
 
-const typeDefs = gql`type Query{
-        ciao: [Ciao]
-    }
-    type User {
-    id: ID
-    name: String
-    username: String
-    password: String
-  }
-    type Ciao{
-        id:ID
-        nome:String,
-        cognome:String
-    }
-    
-    type Mutation{addUser(name: String, username: String, password: String): User}
-   `; 
-
-const resolvers ={
-    Mutation :{addUser: (root, args, context, info) => {
-        console.log(args)
-        return{id: 1, name: "dd", username:"gg"}
-      }},
-    Query:{ciao:()=>[{"id":1,"nome":"Daniel","cognome":"piga"},{"id":2,"nome":"jack","cognome":"boo"}]}
-};
 
 const server = new ApolloServer({typeDefs, resolvers});
 
